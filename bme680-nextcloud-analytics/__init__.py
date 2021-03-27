@@ -39,10 +39,11 @@ def main():
     sensor.set_temperature_oversample(bme680.OS_8X)
     sensor.set_filter(bme680.FILTER_SIZE_3)
 
-    # sensor.set_gas_status(bme680.ENABLE_GAS_MEAS)
-    # sensor.set_gas_heater_temperature(320)
-    # sensor.set_gas_heater_duration(150)
-    # sensor.select_gas_heater_profile(0)
+    if "enable_gas_sensor" in config and config["enable_gas_sensor"]:
+        sensor.set_gas_status(bme680.ENABLE_GAS_MEAS)
+        sensor.set_gas_heater_temperature(320)
+        sensor.set_gas_heater_duration(150)
+        sensor.select_gas_heater_profile(0)
 
     while True:
         sensor_data = monitor(
